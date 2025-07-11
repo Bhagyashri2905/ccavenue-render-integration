@@ -4,6 +4,7 @@ $access_code = 'ATJ5ESBC4GUHISZMC7';
 $URL = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans";
 
 header("Content-Type: application/json");
+
 $raw = file_get_contents("php://input");
 $input = json_decode($raw, true);
 
@@ -32,14 +33,22 @@ $status = $responseParts['status'] ?? '0';
 
 $enc_response_clean = preg_replace('/[^a-fA-F0-9]/', '', $enc_response);
 if (strlen($enc_response_clean) % 2 !== 0) {
-    echo json_encode(["status" => "0", "error" => "enc_response not valid HEX", "raw" => $enc_response]);
+    echo json_encode([
+        "status" => "0",
+        "error" => "enc_response not valid HEX",
+        "raw" => $enc_response
+    ]);
     exit;
 }
 
 $decrypted = decrypt($enc_response_clean, $working_key);
 $responseData = json_decode($decrypted, true);
 
-echo json_encode(["status" => $status, "tiny_url" => $responseData['tiny_url'] ?? '', "full_response" => $responseData]);
+echo json_encode([
+    "status" => $status,
+    "tiny_url" => $responseData['tiny_url'] ?? '',
+    "full_response" => $responseData
+]);
 
 function encrypt($plainText, $key) {
     $key = hextobin(md5($key));
@@ -62,3 +71,31 @@ function hextobin($hexString) {
     return $bin;
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
