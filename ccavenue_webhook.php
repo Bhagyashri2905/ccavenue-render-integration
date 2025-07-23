@@ -1,5 +1,5 @@
 <?php
-$working_key = '353729B2C9F6F83FF8C735846768A145'; // Replace with your staging/live key
+$working_key = '5359E7A74922E31E22D5EF4DC0545518'; // Replace with your staging/live key
 
 // Step 1: Handle encrypted POST from CCAvenue
 $encResp = $_POST['encResp'] ?? '';
